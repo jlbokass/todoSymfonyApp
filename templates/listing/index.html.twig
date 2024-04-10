@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}  {{ parent() }} | Listings {% endblock %}
+
+{% block body %}
+    <h1 class="my-5 text-center">Welcome to my TODO App</h1>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <ul class="list-group">
+                {% for listing in listings %}
+                <li class="list-group-item d-flex justify-content-between">
+                    {{ listing.name }}
+                    <div>
+                        <a href="#"><i class="fa-solid fa-pen me-3"></i></a>
+                        <a href="#"><i class="fa-solid fa-trash text-danger"></i></a>
+                    </div>
+                </li>
+                {% endfor %}
+                <li class="list-group-item">
+                    {{ form_start(form) }}
+                    <div class="input-group">
+                        {{ form_widget(form.name) }}
+                        <button class="input-group-text" type="submit"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <small>{{ form_errors(form.name) }}</small>
+                    {{ form_end(form) }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-6"></div>
+    </div>
+{% endblock %}
