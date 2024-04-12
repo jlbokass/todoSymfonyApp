@@ -11,11 +11,18 @@
                 <li class="list-group-item d-flex justify-content-between">
                     {{ listing.name }}
                     <div>
-                        <a href="#"><i class="fa-solid fa-pen me-3"></i></a>
-                        <a href="#"><i class="fa-solid fa-trash text-danger"></i></a>
+                        {# edit a listing #}
+                        <a href="#">
+                            <i class="fa-solid fa-pen me-3"></i>
+                        </a>
+                        {# delete a listing #}
+                        <a href="#">
+                            <i class="fa-solid fa-trash text-danger"></i>
+                        </a>
                     </div>
                 </li>
                 {% endfor %}
+                {# Create a listing #}
                 <li class="list-group-item">
                     {{ form_start(form) }}
                     <div class="input-group">

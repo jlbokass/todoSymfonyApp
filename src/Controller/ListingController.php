@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/', name: 'app_listing_')]
 class ListingController extends AbstractController
 {
-    #[Route('/', methods: ['GET','POST'])]
+    #[Route('/',name: 'all', methods: ['GET','POST'])]
     public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
         // List
@@ -40,7 +40,7 @@ class ListingController extends AbstractController
                 'Your changes were saved!'
             );
 
-            return $this->redirectToRoute('app_listing_app_listing_index');
+            return $this->redirectToRoute('app_listing_all');
         }
 
         return $this->render('listing/index.html.twig', [
@@ -50,15 +50,15 @@ class ListingController extends AbstractController
     }
 
     // delete
-    public function delete(Request $request, Listing $listing): Response
+    #[Route('/{id}',name: 'delete', methods: ['GET','POST'])]
+    public function delete(Request $request, Listing $listing, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $listing->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($listing);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_listing_app_listing_index');
+        return $this->redirectToRoute('app_listing_all');
     }
 
 }
